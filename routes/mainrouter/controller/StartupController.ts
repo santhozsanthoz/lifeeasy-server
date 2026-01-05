@@ -59,7 +59,7 @@ export function getOneTimeTransporterData() {
       } catch (err) {
         console.error("Resend API sendMail error:", err);
         if(callback) {  
-            callback(error, null);
+            callback(err, null);
         }
         throw err;
       }
