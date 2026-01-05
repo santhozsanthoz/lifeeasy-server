@@ -5,9 +5,18 @@ const cors = require("cors");
 require("dotenv").config();
 
 const connection = getOneTimeConnection();
+const transporter = getOneTimeTransporterData();
 
 export function getConnection() {
     return connection;
+}
+
+export function getTransporterData() {
+    return transporter;
+}
+
+export function getConnectionForDbCreation() {
+  return connection;
 }
 
 function getOneTimeConnection() {
@@ -18,20 +27,12 @@ function getOneTimeConnection() {
       user: process.env.DB_LOCAL_USER,
       password: process.env.DB_LOCAL_PASSWORD,
       database: process.env.DB_LOCAL_DBNAME,
+      waitForConnections: true,
+      queueLimit: 0,
     });
 }
 
-export function getConnectionForDbCreation() {
-  return mysql2.createPool({
-    connectionLimit: process.env.DB_LOCAL_CON_LIMMIT,
-    port: process.env.DB_LOCAL_PORT,
-    host: process.env.DB_LOCAL_HOST,
-    user: process.env.DB_LOCAL_USER,
-    password: process.env.DB_LOCAL_PASSWORD,
-  });
-}
-
-export function getTransporterData() {
+function getOneTimeTransporterData() {
   return nodemailer.createTransport({
       host: 'smtp.resend.com',
       port: 587,
