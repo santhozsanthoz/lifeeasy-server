@@ -4,7 +4,13 @@ const mysql2 = require("mysql2");
 const cors = require("cors");
 require("dotenv").config();
 
+const connection = getOneTimeConnection();
+
 export function getConnection() {
+    return connection;
+}
+
+function getOneTimeConnection() {
     return mysql2.createPool({
       connectionLimit: process.env.DB_LOCAL_CON_LIMMIT,
       port: process.env.DB_LOCAL_PORT,
