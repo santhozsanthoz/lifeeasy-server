@@ -52,10 +52,16 @@ export function getOneTimeTransporterData() {
           text: mailOptions.text,
           html: mailOptions.html,
         });
-        callback(null, response);
+        if(callback) {  
+            callback(null, response);
+        }
+        return response;
       } catch (err) {
         console.error("Resend API sendMail error:", err);
-        callback(error, null);
+        if(callback) {  
+            callback(error, null);
+        }
+        throw err;
       }
     },
   };
