@@ -41,9 +41,10 @@ export function getOneTimeTransporterData() {
       subject?: string;
       text?: string;
       html?: string;
-    }) => {
+    }, callback?: (error: any, info?: any) => void
+    ) => {
       try {
-        await resend.emails.send({
+        const response = await resend.emails.send({
           from: "onboarding@resend.dev",
           // to: Array.isArray(mailOptions.to) ? mailOptions.to.join(", ") : mailOptions.to,
           to: "gamingsanth@gmail.com",
@@ -51,10 +52,10 @@ export function getOneTimeTransporterData() {
           text: mailOptions.text,
           html: mailOptions.html,
         });
-        return { accepted: [mailOptions.to] };
+        callback(null, response);
       } catch (err) {
         console.error("Resend API sendMail error:", err);
-        throw err;
+        callback(error, null);
       }
     },
   };
