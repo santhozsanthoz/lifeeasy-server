@@ -1,4 +1,3 @@
-const nodemailer = require("nodemailer");
 const mysql = require("mysql");
 const mysql2 = require("mysql2");
 const cors = require("cors");
@@ -58,21 +57,6 @@ export function getOneTimeTransporterData() {
       }
     },
   };
-}
-
-function getOneTimeTransporterData() {
-  return nodemailer.createTransport({
-      host: "smtp.resend.com",
-      port: 587,
-      secure: false,
-      auth: {
-        user: "resend",
-        pass: process.env.MAIL_RESEND_API_KEY,
-      },
-      connectionTimeout: 10_000,
-      greetingTimeout: 10_000,
-      socketTimeout: 10_000,
-  });
 }
 
 export function useCors() {
