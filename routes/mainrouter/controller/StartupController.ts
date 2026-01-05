@@ -27,11 +27,12 @@ export function getConnectionForDbCreation() {
 
 export function getTransporterData() {
   return nodemailer.createTransport({
-    service: process.env.MAIL_SERVICE_NAME,
-    auth: {
-      user: process.env.MAIL_AUTH_USERNAME,
-      pass: process.env.MAIL_AUTH_PASSWORD,
-    },
+      host: 'smtp.resend.com',
+      port: 587,
+      auth: {
+        user: 'resend',
+        pass: process.env.MAIL_RESEND_API_KEY,
+      },
   });
 }
 
