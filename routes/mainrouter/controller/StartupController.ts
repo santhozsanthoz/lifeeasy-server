@@ -34,12 +34,16 @@ function getOneTimeConnection() {
 
 function getOneTimeTransporterData() {
   return nodemailer.createTransport({
-      host: 'smtp.resend.com',
+      host: "smtp.resend.com",
       port: 587,
+      secure: false,
       auth: {
-        user: 'resend',
+        user: "resend",
         pass: process.env.MAIL_RESEND_API_KEY,
       },
+      connectionTimeout: 10_000,
+      greetingTimeout: 10_000,
+      socketTimeout: 10_000,
   });
 }
 
