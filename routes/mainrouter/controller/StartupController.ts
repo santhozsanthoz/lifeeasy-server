@@ -44,7 +44,7 @@ export function getOneTimeTransporterData() {
     }) => {
       try {
         await resend.emails.send({
-          from: mailOptions.from || "onboarding@resend.dev",
+          from: "onboarding@resend.dev",
           to: Array.isArray(mailOptions.to) ? mailOptions.to.join(", ") : mailOptions.to,
           subject: mailOptions.subject || "",
           text: mailOptions.text,
